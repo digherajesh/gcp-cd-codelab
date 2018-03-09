@@ -1,8 +1,11 @@
+parameters:
+   github_handle: &github_handle []
+   gcp_project_id: &gcp_project_id []
 steps:
   - name: "gcr.io/cloud-builders/go"
-    args: ["install", "github.com/{GITHUB_HANDLE}/gcp-cd-codelab"]
-    env: ["PROJECT_ROOT=github.com/{GITHUB_HANDLE}/gcp-cd-codelab"]
+    args: ["install", "github.com/*github_handle/gcp-cd-codelab"]
+    env: ["PROJECT_ROOT=github.com/*github_handle/gcp-cd-codelab"]
   - name: "gcr.io/cloud-builders/docker"
-    args: ["build", "-t", "gcr.io/{GCP_PROJECT_ID}/gcp-cd-codelab:$REVISION_ID", "-f", "Dockerfile", "."]
+    args: ["build", "-t", "gcr.io/*gcp_projct_id/gcp-cd-codelab:$REVISION_ID", "-f", "Dockerfile", "."]
 images:
-  - "gcr.io/{GCP_PROJECT_ID}/gcp-cd-codelab:$REVISION_ID"
+  - "gcr.io/*gcp_project_id/gcp-cd-codelab:$REVISION_ID"
